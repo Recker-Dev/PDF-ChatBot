@@ -1,0 +1,8 @@
+# Ignore environment files
+.env
+
+# Ignore virtual environment folders
+rag_pdf_Env/
+
+
+imp.txt
