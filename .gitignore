@@ -2,7 +2,7 @@
 .env
 
 # Ignore virtual environment folders
-rag_pdf_Env/
+rag_pdf_env/
 
 
 imp.txt
