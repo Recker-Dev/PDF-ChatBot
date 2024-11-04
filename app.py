@@ -15,7 +15,13 @@ from io import BytesIO
 
 load_dotenv()
 
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+# genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+
+# Access the Google API key from Streamlit secrets
+api_key = st.secrets["GOOGLE_API_KEY"]
+
+# Configure genai with the API key
+genai.configure(api_key=api_key)
 
 
  ## Get all the pdfs that are uploaded.
