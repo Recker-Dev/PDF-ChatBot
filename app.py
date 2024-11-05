@@ -35,22 +35,15 @@ genai.configure(api_key=api_key)
 
 #     return text
 
-def get_pdf_text(pdf):
-    # Extract bytes from the UploadedFile object
-    pdf_bytes = pdf.read()
-    
-    # Wrap the bytes in BytesIO to make it file-like
-    pdf_file = BytesIO(pdf_bytes)
-    
-    # Pass the file-like object to PdfReader
-    pdf_reader = PdfReader(pdf_file)
-    
-    # Extract text or perform other actions with pdf_reader
-    raw_text = ""
-    for page in pdf_reader.pages:
-        raw_text += page.extract_text()
-    
-    return raw_text
+def get_pdf_text(pdf_files):
+    all_text = ""
+    for pdf in pdf_files:
+        pdf_bytes = pdf.read()
+        pdf_file = BytesIO(pdf_bytes)
+        pdf_reader = PdfReader(pdf_file)
+        for page in pdf_reader.pages:
+            all_text += page.extract_text()
+    return all_text
 
  ## Get chunks of text.
 def get_text_chunks(text):
@@ -113,7 +106,7 @@ def main():
     
     with st.sidebar:
         st.title("Menu:")
-        pdf_docs=st.file_uploader("Upload your PDF Files and Click on the Submit & Process ")
+        pdf_docs=st.file_uploader("Upload your PDF Files and Click on the Submit & Process ", accept_multiple_files=True)
         if st.button("Submit & Process"):
             with st.spinner("Processing..."):
                 raw_text= get_pdf_text(pdf_docs)
@@ -124,3 +117,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
